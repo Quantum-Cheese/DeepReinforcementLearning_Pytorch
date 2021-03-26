@@ -21,7 +21,7 @@ python main_dqn_atari.py SpaceInvaders-v0 train --learning_rate 1e-3
 
 To run in back ground and save a log file:
 ```
-nohup python main_dqn_atari.py SpaceInvaders-v0 train --learning_rate 1e-3 > log.txt 2>&1 &
+nohup python -u main_dqn_atari.py SpaceInvaders-v0 train --learning_rate 1e-3 > train_20210326.log 2>&1 &
 ```
 
 #### 2. To test a trained agent
