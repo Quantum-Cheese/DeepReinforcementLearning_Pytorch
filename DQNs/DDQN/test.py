@@ -3,6 +3,17 @@ import numpy as np
 import torch
 from collections import namedtuple, deque
 
+lst = [1,2,3,4,0,6]
+
+print( np.array(lst) / 2.5)
+print( np.array(lst) / 2.5 + 0.0001)
+
+s1 = np.array([[1,2,3,4]])
+s2 = np.vstack([[3,4,5,6]])
+print(np.vstack([s1,s2]))
+
+
+
 
 target_org=np.array([[ 0.0910, -0.0224, -0.0552, -0.0192],
         [ 0.0908, -0.0209, -0.0553, -0.0181],
@@ -48,6 +59,8 @@ memory.append(e2)
 memory.append(exp(4.6,0,8.56,-2.3,False))
 memory.append(exp(8.7,0,8.56,-4.3,False))
 memory.append(exp(2.2,0,-0.8,-2.3,False))
+
+
 
 # print(memory)
 # print(memory[0].state)

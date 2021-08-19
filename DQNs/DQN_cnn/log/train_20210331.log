@@ -1,0 +1,76 @@
+nohup: ignoring input
+####################################################
+ Start Training on SpaceInvaders-v0 environment using DQN with CNN
+####################################################
+
+Training Parameters :
+ Train episode : 2000
+ Network update every 10 time step 
+ Replay buffer size : 3500
+ Batch size : 128
+ Learning rate : 0.0005 
+ GAMMA : 0.99 
+ Epsilon decay rate : 0.995
+
+Episode 100	 Loss 37.57309341430664 	 Average Score: 144.10
+Running time till now :0:20:57.373758
+
+Episode 200	 Loss 45.944541931152344 	 Average Score: 149.85
+Running time till now :0:43:08.088817
+
+Episode 300	 Loss 77.53382110595703 	 Average Score: 200.00
+Running time till now :1:08:21.291658
+
+Episode 400	 Loss 94.59493255615234 	 Average Score: 200.65
+Running time till now :1:34:55.924278
+
+Episode 500	 Loss 20.661224365234375 	 Average Score: 228.70
+Running time till now :2:02:23.143794
+
+Episode 600	 Loss 38.10764694213867 	 Average Score: 259.20
+Running time till now :2:32:13.928401
+
+Episode 700	 Loss 21.809246063232422 	 Average Score: 238.65
+Running time till now :2:58:31.344456
+
+Episode 800	 Loss 27.276247024536133 	 Average Score: 252.15
+Running time till now :3:22:48.359756
+
+Episode 900	 Loss 64.65150451660156 	 Average Score: 273.00
+Running time till now :3:50:41.210916
+
+Episode 1000	 Loss 25.74323272705078 	 Average Score: 266.45
+Running time till now :4:16:18.361667
+
+Episode 1100	 Loss 18.910884857177734 	 Average Score: 277.10
+Running time till now :4:44:24.187721
+
+Episode 1200	 Loss 26.118581771850586 	 Average Score: 267.65
+Running time till now :5:09:37.085516
+
+Episode 1300	 Loss 25.362396240234375 	 Average Score: 251.85
+Running time till now :5:34:53.701273
+
+Episode 1400	 Loss 26.500167846679688 	 Average Score: 281.05
+Running time till now :6:00:55.716864
+
+Episode 1500	 Loss 32.66218185424805 	 Average Score: 257.55
+Running time till now :6:25:39.960819
+
+Episode 1600	 Loss 52.91573715209961 	 Average Score: 268.40
+Running time till now :6:50:39.701043
+
+Episode 1700	 Loss 43.722801208496094 	 Average Score: 265.95
+Running time till now :7:13:50.829814
+
+Episode 1800	 Loss 49.69996643066406 	 Average Score: 262.20
+Running time till now :7:39:07.592524
+
+Episode 1900	 Loss 84.68921661376953 	 Average Score: 266.25
+Running time till now :8:06:00.022165
+
+Episode 2000	 Loss 24.432580947875977 	 Average Score: 259.90
+Running time till now :8:37:15.948752
+
+Training finished, total running time:8:37:15.969363. 
+ Model saved.

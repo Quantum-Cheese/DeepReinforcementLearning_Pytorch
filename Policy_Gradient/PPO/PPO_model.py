@@ -4,8 +4,6 @@ import torch.nn.functional as F
 from torch.distributions import Categorical
 from torch.distributions import Normal
 
-import numpy as np
-
 
 class ActorDiscrete(nn.Module):
     """
@@ -35,8 +33,7 @@ class ActorDiscrete(nn.Module):
         probs = self.forward(state)
         m = Categorical(probs)
         action = m.sample()
-        # return action for current state, and the corresponding probability
-
+        ## return action for current state, and the corresponding probability
         # result_dic={"action":action.item(),"log_prob":m.log_prob(action)
         #     ,"prob":probs[:,action.item()].item()}
 

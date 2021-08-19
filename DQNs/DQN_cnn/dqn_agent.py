@@ -38,9 +38,11 @@ class ReplayBuffer:
         :param p: sample probability for this experience
         :return:
         """
-        # memory中存入每个经验(s,a,r,s')的采样概率
         e = self.experience(state, action, reward, next_state, done)
         self.memory.append(e)
+
+    def clean_buffer(self):
+        self.memory.clear()
 
     def sample(self):
         """Randomly sample a batch of experiences from memory."""
@@ -61,7 +63,7 @@ class ReplayBuffer:
 
 
 class Agent_dqn():
-    def __init__(self, input_channel,action_size,learning_rate=5e-3,buffer_size=1e4,batch_size=32):
+    def __init__(self, input_channel,action_size,learning_rate=5e-3,buffer_size=int(1e4),batch_size=32):
         """Initialize an Agent object.
 
         Params
@@ -115,7 +117,7 @@ class Agent_dqn():
         self.t_step += 1
 
         # add an experience for current time step
-        self.memory.add(state,action,reward,next_state,done)
+        self.memory.add(state, action, reward, next_state, done)
 
         # Learn every UPDATE_EVERY time steps
         if (self.t_step+1) % update_every==0:
@@ -127,7 +129,7 @@ class Agent_dqn():
     def learn(self,exps,gamma):
         # fetch the batch (s,a,r,s',done) from experiences batch
         states,actions,rewards,next_states,dones = exps
-        # print(states.device)
+        print(states.shape)
 
         # ------------------ calculate loss —------------------------- #
 
@@ -145,14 +147,12 @@ class Agent_dqn():
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
-
         # print(next(self.qnetwork_local.parameters()).is_cuda)
 
         # ---------------- update target Q net -------------------- #
         self.soft_update(self.qnetwork_local, self.qnetwork_target, TAU)
 
         return loss.cpu().detach().numpy()
-
 
     def soft_update(self, local_model, target_model, tau):
         """Soft update model parameters.

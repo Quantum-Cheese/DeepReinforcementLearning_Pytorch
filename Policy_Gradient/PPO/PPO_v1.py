@@ -21,6 +21,7 @@ UPDATE_TIME=10
 max_grad_norm=0.5
 Transition = namedtuple('Transition', ['state', 'action',  'prob', 'reward'])
 
+
 class PPO_v1():
 
     def __init__(self, state_size, action_size,continuous=False):

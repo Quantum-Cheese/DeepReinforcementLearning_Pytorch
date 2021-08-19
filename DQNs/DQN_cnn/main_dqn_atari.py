@@ -8,20 +8,22 @@ from matplotlib import pyplot as plt
 from collections import deque
 from dqn_agent import Agent_dqn
 import atari_wappers
+import psutil
+sys_mem = psutil.virtual_memory()
 
 parser = argparse.ArgumentParser()
-'''------------------###### 基本参数 ######--------------------'''
+'''-----------------------------------###### 基本参数 ######-------------------------------'''
 parser.add_argument('env_name',type=str)
 parser.add_argument('run_mode',type=str,help='运行模式:train/test')
-'''------------------###### 测试参数 #####--------------------'''
+'''----------------------------------###### 测试参数 #####--------------------------------'''
 parser.add_argument('--test_episode',type=int,default=500,help='测试的episode数量',required=False)
 parser.add_argument('--test_model_file',type=str,default='',help = '测试用的模型文件路径',required=False)
 parser.add_argument('--test_video_play',type=str,default='no',
                     help='测试时是否需要显示游戏运行界面(默认都保存得分曲线) yes/no',required=False)
-'''------------------###### 训练参数 #####--------------------'''
+'''-----------------------------------###### 训练参数 #####---------------------------------'''
 parser.add_argument('--train_episode',type=int,default=2000,help='训练的episode数量',required=False)
 parser.add_argument('--learning_rate',type=float,default=5e-3,help='优化器的学习率',required=False)
-parser.add_argument('--buffer_size',type=int,default=10000,help='Replay buffer 的最大容量',required=False)
+parser.add_argument('--buffer_size',type=int,default=5000,help='Replay buffer 的最大容量',required=False)
 parser.add_argument('--batch_size',type=int,default=32,help='每次训练的 batch 大小',required=False)
 parser.add_argument('--gamma',type=float,default=0.99,help='折扣率',required=False)
 parser.add_argument('--update_every',type=int,default=5,help='每隔多少 time step 训练一次',required=False)
@@ -38,6 +40,14 @@ def plot_scores(scores,filename):
     plt.savefig(filename)
 
 
+def save_model():
+    path = 'Models/'
+    if not os.path.exists(path):
+        os.makedirs(path)
+    model_file = 'Models/CNN_model' + '|' + arrow.now().format('MM-DD#HH:mm') + '.pth'
+    torch.save(agent.qnetwork_local.state_dict(), model_file)
+
+
 def train_agent(env,agent,n_episode,eps_decay,gamma,update_every):
     scores = []  # list containing scores from each episode
     scores_window = deque(maxlen=100)  # last 100 scores
@@ -48,6 +58,10 @@ def train_agent(env,agent,n_episode,eps_decay,gamma,update_every):
         score = 0
         episode_loss=[]
         while True:
+            # # check the memory usage of system, clean replay buffer if too high
+            # if (sys_mem.used / sys_mem.total) >= 0.03:
+            #     agent.memory.clean_buffer()
+            #     print('Buffer cleaned on episode {}'.format(i_episode))
             # get action
             action = agent.act(state,i_episode,eps_decay)
             # interact with env (one step)
@@ -68,18 +82,22 @@ def train_agent(env,agent,n_episode,eps_decay,gamma,update_every):
         scores_window.append(score)
         scores.append(score)
 
-        print('\rEpisode {}\t Loss {} \t Average Score: {:.2f}'.format(i_episode, np.mean(episode_loss),
-                                                                       np.mean(scores_window)), end="")
+        # print('\rEpisode {}\t Loss {} \t Average Score: {:.2f}'.format(i_episode, np.mean(episode_loss),
+        #                                                                np.mean(scores_window)), end="")
+        #
+        # if i_episode > 25:
+        #     print('Replay Buffer size: {}'.format(agent.memory.__len__()))
+        #     print('Memory used: ',sys_mem.used)
+        #     print('Memory used rate: ',sys_mem.used/sys_mem.total)
+
         if i_episode % 100 == 0:
             print('\rEpisode {}\t Loss {} \t Average Score: {:.2f}'.format(i_episode, np.mean(episode_loss),
                                                                            np.mean(scores_window)))
             print('\rRunning time till now :{}\n'.format(arrow.now() - start_time))
 
-            path = 'Models/'
-            if not os.path.exists(path):
-                os.makedirs(path)
-            model_file = 'Models/CNN_model' + '|' + arrow.now().format('MM-DD#HH:mm')
-            torch.save(agent.qnetwork_local.state_dict(), model_file)
+    # save model when training completes
+    save_model()
+    print("Training finished, total running time:{}. \n Model saved.".format(arrow.now()-start_time))
 
     return scores
 
@@ -154,8 +172,8 @@ else:
     plot_scores(trained_scores, train_score_file)
 
 
-# if __name__ =="__main__":
-#     env = gym.make('SpaceInvaders-v0')
-#     state_size, action_size = env.observation_space.shape, env.action_space.n
-#     dqn_agent = Agent_dqn(state_size,action_size)
-#     train_agent(env, dqn_agent, 1000, "Models/dqnCNN_model_0324.pth")
+if __name__ =="__main__":
+    env = atari_wappers.make_env("SpaceInvaders-v0")
+    state_size, action_size = env.observation_space.shape, env.action_space.n
+    dqn_agent = Agent_dqn(state_size,action_size)
+    train_agent(env,dqn_agent,1,0.98,0.995,5)

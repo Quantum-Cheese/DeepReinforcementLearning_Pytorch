@@ -10,11 +10,11 @@ class CNN_Model (nn.Module):
         super(CNN_Model, self).__init__()
         self.conv = nn.Sequential(
             # input_shape 的第一个维度为 输入的 channel 数，比如输入为（4，84，84）时，channel = 4
-            nn.Conv2d(input_shape[0], 32, kernel_size=8, stride=4),
+            nn.Conv2d(input_shape[0], 128, kernel_size=8, stride=4),
             nn.ReLU(),
-            nn.Conv2d(32, 64, kernel_size=4, stride=2),
+            nn.Conv2d(128, 256, kernel_size=4, stride=2),
             nn.ReLU(),
-            nn.Conv2d(64, 64, kernel_size=3, stride=1),
+            nn.Conv2d(256, 128, kernel_size=3, stride=1),
             nn.ReLU()
         )
         conv_out_size = self._get_conv_out(input_shape)

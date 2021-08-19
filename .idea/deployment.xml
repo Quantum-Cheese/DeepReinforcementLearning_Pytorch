@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="lesreg@192.168.14.110:22 password" remoteFilesAllowedToDisappearOnAutoupload="false">
+  <component name="PublishConfigData" autoUpload="Always" serverName="14.110" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="lesreg@192.168.14.110:22 password">
+      <paths name="14.110">
         <serverdata>
           <mappings>
-            <mapping deploy="/home/lesreg/Remote_Pros/DRL_pytorch" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/lesreg/Remote_Pros/DRL_pytorch" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

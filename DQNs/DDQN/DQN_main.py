@@ -1,8 +1,5 @@
 import gym
 import arrow
-import random
-import arrow
-import pandas as pd
 import torch
 import numpy as np
 from collections import deque
@@ -12,9 +9,9 @@ import matplotlib.pyplot as plt
 from DQNs.DDQN.ddqn_v3 import AgentV3
 
 
-def dqn(agent,model_file,n_episodes=20000, max_t=1000,
+def dqn(agent,model_file,n_episodes=2000, max_t=1000,
         eps_start=1.0, eps_end=0.01, eps_decay=0.995,
-        beta_start=0.4,beta_end=1.0,beta_incre=0.001):
+        beta_start=0.4):
     """Deep Q-Learning.
 
 

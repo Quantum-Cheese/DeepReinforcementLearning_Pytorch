@@ -60,6 +60,7 @@ class AgentV3():
             # If enough samples are available in memory, get random subset and learn
             if len(self.memory) > BATCH_SIZE:
                 experiences = self.memory.sample()
+
                 loss=self.learn(experiences, GAMMA)
                 return loss
 
@@ -91,7 +92,7 @@ class AgentV3():
             experiences (Tuple[torch.Variable]): tuple of (s, a, r, s', done) tuples
             gamma (float): discount factor
         """
-        # 从 experiences 取得所有时间步的 (s,a,r,s',done)的序列，均为列向量 [BATCH_SIZE,1]
+        # 从 experiences 取得所有时间步的 (s,a,r,s',done)的序列
         states, actions, rewards, next_states, dones = experiences
 
         # ----------计算 Q targets------------------------------ #

@@ -1,7 +1,6 @@
 import numpy as np
 import random
 from collections import namedtuple, deque
-
 from LunarLander.DQN.model import QNetwork
 
 import torch

@@ -1,0 +1,66 @@
+nohup: ignoring input
+####################################################
+ Start Training on SpaceInvaders-v0 environment using DQN with CNN
+####################################################
+
+Training Parameters :
+ Train episode : 1000
+ Network update every 5 time step 
+ Replay buffer size : 3500
+ Batch size : 64
+ Learning rate : 0.005 
+ GAMMA : 0.99 
+ Epsilon decay rate : 0.995
+
+Episode 100	 Loss 71.22970581054688 	 Average Score: 180.00
+Running time till now :0:22:27.094323
+
+Episode 200	 Loss 29.8588924407959 	 Average Score: 152.60
+Running time till now :0:44:21.409593
+
+Episode 300	 Loss 61.14106369018555 	 Average Score: 209.75
+Running time till now :1:09:07.883698
+
+Episode 400	 Loss 30.508338928222656 	 Average Score: 218.05
+Running time till now :1:35:38.577875
+
+Episode 500	 Loss 89.18991088867188 	 Average Score: 245.05
+Running time till now :2:03:52.850307
+
+Episode 600	 Loss 21.991769790649414 	 Average Score: 262.35
+Running time till now :2:30:57.078511
+
+Episode 700	 Loss 23.49405860900879 	 Average Score: 254.65
+Running time till now :2:56:23.053378
+
+Episode 800	 Loss 81.24069213867188 	 Average Score: 263.45
+Running time till now :3:21:37.061215
+
+Episode 900	 Loss 24.93558692932129 	 Average Score: 284.15
+Running time till now :3:50:02.799914
+
+Episode 1000	 Loss 85.55946350097656 	 Average Score: 268.20
+Running time till now :4:16:22.288483
+
+Training finished, total running time:4:16:22.299132. 
+ Model saved.
+Traceback (most recent call last):
+  File "main_dqn_atari.py", line 178, in <module>
+    dqn_agent = Agent_dqn(state_size,action_size)
+  File "/home/lesreg/Remote_Pros/DRL_pytorch/DQNs/DQN_cnn/dqn_agent.py", line 79, in __init__
+    self.qnetwork_local = CNN_Model(input_channel,action_size).to(device)
+  File "/home/lesreg/Remote_Pros/DRL_pytorch/DQNs/DQN_cnn/cnn_model.py", line 20, in __init__
+    conv_out_size = self._get_conv_out(input_shape)
+  File "/home/lesreg/Remote_Pros/DRL_pytorch/DQNs/DQN_cnn/cnn_model.py", line 28, in _get_conv_out
+    o = self.conv(torch.zeros((1, *input_shape)))
+  File "/root/anaconda3/envs/gym_py36/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/anaconda3/envs/gym_py36/lib/python3.6/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/root/anaconda3/envs/gym_py36/lib/python3.6/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/root/anaconda3/envs/gym_py36/lib/python3.6/site-packages/torch/nn/modules/conv.py", line 399, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/root/anaconda3/envs/gym_py36/lib/python3.6/site-packages/torch/nn/modules/conv.py", line 396, in _conv_forward
+    self.padding, self.dilation, self.groups)
+RuntimeError: Calculated padded input size per channel: (160 x 3). Kernel size: (8 x 8). Kernel size can't be greater than actual input size

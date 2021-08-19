@@ -1,0 +1,14 @@
+nohup: ignoring input
+####################################################
+ Start Training on SpaceInvaders-v0 environment using DQN with CNN
+####################################################
+
+Training Parameters :
+ Train episode : 1000
+ Network update every 5 time step 
+ Replay buffer size : 5000
+ Batch size : 64
+ Learning rate : 0.005 
+ GAMMA : 0.99 
+ Epsilon decay rate : 0.995
+
